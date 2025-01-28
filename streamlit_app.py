@@ -101,7 +101,7 @@ SIMPLE_STYLE = """
 st.markdown(SIMPLE_STYLE, unsafe_allow_html=True)
 
 # App title
-st.markdown("<div class='title'>SVM Prediction App</div>", unsafe_allow_html=True)
+st.markdown("<div class='title'>SVM App</div>", unsafe_allow_html=True)
 
 # Load the model
 MODEL_PATH = "svm_model.pkl"
