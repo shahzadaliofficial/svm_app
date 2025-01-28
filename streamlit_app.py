@@ -23,7 +23,7 @@ def predict(model, input_data):
 st.set_page_config(
     page_title="SVM Prediction App",
     layout="centered",
-    page_icon="🤖",
+    
     initial_sidebar_state="expanded"
 )
 
@@ -101,7 +101,7 @@ SIMPLE_STYLE = """
 st.markdown(SIMPLE_STYLE, unsafe_allow_html=True)
 
 # App title
-st.markdown("<div class='title'>SVM Prediction App 🤖</div>", unsafe_allow_html=True)
+st.markdown("<div class='title'>SVM Prediction App</div>", unsafe_allow_html=True)
 
 # Load the model
 MODEL_PATH = "svm_model.pkl"
