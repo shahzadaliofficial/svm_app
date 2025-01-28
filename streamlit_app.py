@@ -27,86 +27,78 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# New Modern CSS Style
-MODERN_STYLE = """
+# Simple CSS Style
+SIMPLE_STYLE = """
     <style>
     /* Main app background */
     .stApp {
-        background-color: #1e1e2f; /* Dark background */
-        color: #ffffff; /* White text */
+        background-color: #f5f5f5; /* Light gray background */
+        color: #333333; /* Dark text */
         font-family: 'Arial', sans-serif;
     }
 
     /* Title styling */
     .title {
         font-size: 36px;
-        color: #ff6b6b; /* Vibrant red */
+        color: #333333; /* Dark text */
         font-family: 'Arial', sans-serif;
         text-align: center;
         margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     /* Button styling */
     .stButton>button {
-        background-color: #4ecdc4; /* Teal */
-        color: #ffffff;
+        background-color: #4CAF50; /* Green */
+        color: #ffffff; /* White text */
         font-size: 16px;
-        border-radius: 25px; /* Rounded corners */
+        border-radius: 5px; /* Slightly rounded corners */
         padding: 10px 20px;
         border: none;
         transition: background-color 0.3s ease;
     }
 
     .stButton>button:hover {
-        background-color: #45b7af; /* Darker teal on hover */
+        background-color: #45a049; /* Darker green on hover */
     }
 
     /* Input field styling */
     .stNumberInput input, .stSelectbox select {
-        background-color: #2d2d44; /* Dark input background */
-        color: #ffffff; /* White text */
-        border-radius: 10px; /* Rounded corners */
-        border: 1px solid #4ecdc4; /* Teal border */
+        background-color: #ffffff; /* White background */
+        color: #333333; /* Dark text */
+        border-radius: 5px; /* Slightly rounded corners */
+        border: 1px solid #cccccc; /* Light gray border */
         padding: 10px;
         font-size: 14px;
     }
 
-    /* Sidebar styling */
-    .stSidebar {
-        background-color: #2d2d44; /* Dark sidebar background */
-        padding: 20px;
-        border-radius: 15px; /* Rounded corners */
-    }
-
     /* Success message styling */
     .stSuccess {
-        background-color: #4ecdc4; /* Teal */
-        color: #ffffff;
-        border-radius: 10px;
+        background-color: #4CAF50; /* Green */
+        color: #ffffff; /* White text */
+        border-radius: 5px;
         padding: 10px;
     }
 
     /* Error message styling */
     .stError {
-        background-color: #ff6b6b; /* Vibrant red */
-        color: #ffffff;
-        border-radius: 10px;
+        background-color: #ff4444; /* Red */
+        color: #ffffff; /* White text */
+        border-radius: 5px;
         padding: 10px;
     }
 
     /* Form container styling */
     .stForm {
-        background-color: #2d2d44; /* Dark form background */
+        background-color: #ffffff; /* White background */
         padding: 20px;
-        border-radius: 15px; /* Rounded corners */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        border-radius: 10px; /* Slightly rounded corners */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     }
     </style>
 """
 
-# Apply the modern style
-st.markdown(MODERN_STYLE, unsafe_allow_html=True)
+# Apply the simple style
+st.markdown(SIMPLE_STYLE, unsafe_allow_html=True)
 
 # App title
 st.markdown("<div class='title'>SVM Prediction App 🤖</div>", unsafe_allow_html=True)
