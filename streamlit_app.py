@@ -23,85 +23,113 @@ def predict(model, input_data):
 st.set_page_config(
     page_title="SVM Prediction App",
     layout="centered",
-    
     initial_sidebar_state="expanded"
 )
 
-# Simple CSS Style
-SIMPLE_STYLE = """
+# Modern CSS Style
+MODERN_STYLE = """
     <style>
-    /* Main app background */
+    /* Main app background with gradient */
     .stApp {
-        background-color: #f5f5f5; /* Light gray background */
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Light gradient background */
         color: #333333; /* Dark text */
         font-family: 'Arial', sans-serif;
     }
 
     /* Title styling */
     .title {
-        font-size: 36px;
-        color: #333333; /* Dark text */
+        font-size: 42px;
+        color: #2c3e50; /* Dark blue text */
         font-family: 'Arial', sans-serif;
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
     }
 
     /* Button styling */
     .stButton>button {
-        background-color: #4CAF50; /* Green */
+        background-color: #3498db; /* Blue */
         color: #ffffff; /* White text */
-        font-size: 16px;
-        border-radius: 5px; /* Slightly rounded corners */
-        padding: 10px 20px;
+        font-size: 18px;
+        border-radius: 25px; /* Fully rounded corners */
+        padding: 12px 24px;
         border: none;
-        transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     }
 
     .stButton>button:hover {
-        background-color: #45a049; /* Darker green on hover */
+        background-color: #2980b9; /* Darker blue on hover */
+        transform: translateY(-2px); /* Slight lift on hover */
     }
 
     /* Input field styling */
     .stNumberInput input, .stSelectbox select {
         background-color: #ffffff; /* White background */
         color: #333333; /* Dark text */
-        border-radius: 5px; /* Slightly rounded corners */
+        border-radius: 10px; /* Rounded corners */
         border: 1px solid #cccccc; /* Light gray border */
-        padding: 10px;
-        font-size: 14px;
+        padding: 12px;
+        font-size: 16px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .stNumberInput input:focus, .stSelectbox select:focus {
+        border-color: #3498db; /* Blue border on focus */
+        box-shadow: 0 0 8px rgba(52, 152, 219, 0.5); /* Glow effect on focus */
     }
 
     /* Success message styling */
     .stSuccess {
-        background-color: #4CAF50; /* Green */
+        background-color: #2ecc71; /* Green */
         color: #ffffff; /* White text */
-        border-radius: 5px;
-        padding: 10px;
+        border-radius: 10px;
+        padding: 15px;
+        font-size: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     }
 
     /* Error message styling */
     .stError {
-        background-color: #ff4444; /* Red */
+        background-color: #e74c3c; /* Red */
         color: #ffffff; /* White text */
-        border-radius: 5px;
-        padding: 10px;
+        border-radius: 10px;
+        padding: 15px;
+        font-size: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     }
 
     /* Form container styling */
     .stForm {
         background-color: #ffffff; /* White background */
-        padding: 20px;
-        border-radius: 10px; /* Slightly rounded corners */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        padding: 25px;
+        border-radius: 15px; /* Rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        margin: 20px auto;
+        max-width: 600px; /* Limit form width */
+    }
+
+    /* Subheader styling */
+    .stSubheader {
+        font-size: 24px;
+        color: #2c3e50; /* Dark blue text */
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    /* Placeholder text styling */
+    input::placeholder {
+        color: #999999; /* Light gray placeholder text */
     }
     </style>
 """
 
-# Apply the simple style
-st.markdown(SIMPLE_STYLE, unsafe_allow_html=True)
+# Apply the modern style
+st.markdown(MODERN_STYLE, unsafe_allow_html=True)
 
 # App title
-st.markdown("<div class='title'>SVM App</div>", unsafe_allow_html=True)
+st.markdown("<div class='title'>SVM Prediction App</div>", unsafe_allow_html=True)
 
 # Load the model
 MODEL_PATH = "svm_model.pkl"
