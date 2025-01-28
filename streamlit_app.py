@@ -27,78 +27,64 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Simple CSS Style
-SIMPLE_STYLE = """
+# Minimal CSS Style
+MINIMAL_STYLE = """
     <style>
-    /* Main app background */
+    /* Main app background (adapts to dark/light mode) */
     .stApp {
-        background-color: #f5f5f5; /* Light gray background */
-        color: #333333; /* Dark text */
         font-family: 'Arial', sans-serif;
     }
 
     /* Title styling */
     .title {
         font-size: 36px;
-        color: #333333; /* Dark text */
-        font-family: 'Arial', sans-serif;
         text-align: center;
         margin-bottom: 20px;
     }
 
     /* Button styling */
     .stButton>button {
-        background-color: #4CAF50; /* Green */
-        color: #ffffff; /* White text */
         font-size: 16px;
-        border-radius: 5px; /* Slightly rounded corners */
+        border-radius: 5px;
         padding: 10px 20px;
         border: none;
         transition: background-color 0.3s ease;
     }
 
     .stButton>button:hover {
-        background-color: #45a049; /* Darker green on hover */
+        opacity: 0.8;
     }
 
     /* Input field styling */
-    .stNumberInput input, .stSelectbox select {
-        background-color: #ffffff; /* White background */
-        color: #333333; /* Dark text */
-        border-radius: 5px; /* Slightly rounded corners */
-        border: 1px solid #cccccc; /* Light gray border */
-        padding: 10px;
+    .stNumberInput input, .stRadio>div, .stSelectbox select {
         font-size: 14px;
+        border-radius: 5px;
+        padding: 10px;
     }
 
     /* Success message styling */
     .stSuccess {
-        background-color: #4CAF50; /* Green */
-        color: #ffffff; /* White text */
         border-radius: 5px;
         padding: 10px;
     }
 
     /* Error message styling */
     .stError {
-        background-color: #ff4444; /* Red */
-        color: #ffffff; /* White text */
         border-radius: 5px;
         padding: 10px;
     }
 
     /* Form container styling */
     .stForm {
-        background-color: #ffffff; /* White background */
         padding: 20px;
-        border-radius: 10px; /* Slightly rounded corners */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     </style>
 """
 
-# Apply the simple style
-st.markdown(SIMPLE_STYLE, unsafe_allow_html=True)
+# Apply the minimal style
+st.markdown(MINIMAL_STYLE, unsafe_allow_html=True)
 
 # App title
 st.markdown("<div class='title'>SVM Prediction App 🤖</div>", unsafe_allow_html=True)
