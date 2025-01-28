@@ -1,9 +1,8 @@
 import streamlit as st
 import joblib
 
-# Load the trained SVM model
+# Load the pre-trained SVM model
 def load_model(model_path):
-    """Load the pre-trained SVM model."""
     try:
         model = joblib.load(model_path)
         return model
@@ -12,8 +11,7 @@ def load_model(model_path):
         return None
 
 # Prediction function
-def make_prediction(model, input_data):
-    """Make predictions using the loaded model."""
+def predict(model, input_data):
     try:
         prediction = model.predict([input_data])[0]
         return prediction
@@ -21,81 +19,125 @@ def make_prediction(model, input_data):
         st.error(f"Error making prediction: {e}")
         return None
 
-# Streamlit app
-def main():
-    # Page configuration
-    st.set_page_config(
-        page_title="SVM Classifier App",
-        layout="centered",
-        page_icon="🤖",
-        initial_sidebar_state="expanded"
-    )
+# Streamlit app configuration
+st.set_page_config(
+    page_title="SVM Prediction App",
+    layout="centered",
+    page_icon="🤖",
+    initial_sidebar_state="expanded"
+)
 
-    # Custom CSS for styling
-    st.markdown("""
+# New Modern CSS Style
+MODERN_STYLE = """
     <style>
+    /* Main app background */
+    .stApp {
+        background-color: #1e1e2f; /* Dark background */
+        color: #ffffff; /* White text */
+        font-family: 'Arial', sans-serif;
+    }
+
+    /* Title styling */
+    .title {
+        font-size: 36px;
+        color: #ff6b6b; /* Vibrant red */
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Button styling */
     .stButton>button {
-        background-color: #4CAF50;
-        color: white;
-        font-weight: bold;
-        border-radius: 5px;
+        background-color: #4ecdc4; /* Teal */
+        color: #ffffff;
+        font-size: 16px;
+        border-radius: 25px; /* Rounded corners */
         padding: 10px 20px;
         border: none;
+        transition: background-color 0.3s ease;
     }
+
     .stButton>button:hover {
-        background-color: #45a049;
+        background-color: #45b7af; /* Darker teal on hover */
     }
-    .stHeader {
-        color: #2E86C1;
+
+    /* Input field styling */
+    .stNumberInput input, .stSelectbox select {
+        background-color: #2d2d44; /* Dark input background */
+        color: #ffffff; /* White text */
+        border-radius: 10px; /* Rounded corners */
+        border: 1px solid #4ecdc4; /* Teal border */
+        padding: 10px;
+        font-size: 14px;
     }
+
+    /* Sidebar styling */
     .stSidebar {
-        background-color: #f4f4f4;
+        background-color: #2d2d44; /* Dark sidebar background */
         padding: 20px;
+        border-radius: 15px; /* Rounded corners */
     }
+
+    /* Success message styling */
     .stSuccess {
-        color: #28a745;
+        background-color: #4ecdc4; /* Teal */
+        color: #ffffff;
+        border-radius: 10px;
+        padding: 10px;
     }
+
+    /* Error message styling */
     .stError {
-        color: #dc3545;
+        background-color: #ff6b6b; /* Vibrant red */
+        color: #ffffff;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    /* Form container styling */
+    .stForm {
+        background-color: #2d2d44; /* Dark form background */
+        padding: 20px;
+        border-radius: 15px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
     }
     </style>
-    """, unsafe_allow_html=True)
+"""
 
-    # App title
-    st.title("SVM Classifier Deployment 🤖")
-    st.write("This app predicts whether a user will purchase a product based on their details.")
+# Apply the modern style
+st.markdown(MODERN_STYLE, unsafe_allow_html=True)
 
-    # Load the model
-    MODEL_PATH = "svm_model.pkl"  # Replace with your model path
-    model = load_model(MODEL_PATH)
+# App title
+st.markdown("<div class='title'>SVM Prediction App 🤖</div>", unsafe_allow_html=True)
 
-    if model is not None:
-        # Input fields in the sidebar
-        with st.sidebar:
-            st.subheader("User Input Features")
-            gender = st.radio("Gender", options=["Male", "Female"], index=0)
-            age = st.slider("Age", min_value=18, max_value=70, value=30)
-            salary = st.number_input("Estimated Salary (USD)", min_value=0, value=50000, step=1000)
+# Load the model
+MODEL_PATH = "svm_model.pkl"
+model = load_model(MODEL_PATH)
 
-            # Convert gender to numeric (Male: 1, Female: 0)
-            gender_encoded = 1 if gender == "Male" else 0
+if model is not None:
+    # Input form
+    with st.form("prediction_form"):
+        st.subheader("Input User Data")
+        gender = st.selectbox("Gender", ["Male", "Female"], index=0, help="Select the gender.")
+        age = st.number_input("Age", min_value=0, max_value=100, step=1, placeholder="Enter age")
+        salary = st.number_input("Estimated Salary", min_value=0, step=1000, placeholder="Enter estimated salary")
 
-            # Predict button
-            if st.button("Predict Purchase"):
-                # Prepare input data
-                input_data = [gender_encoded, age, salary]
+        # Submit button
+        submitted = st.form_submit_button("Predict")
 
-                # Make prediction
-                prediction = make_prediction(model, input_data)
+        if submitted:
+            # Preprocess input
+            gender_numeric = 1 if gender == "Male" else 0
+            user_input = [gender_numeric, age, salary]
 
-                # Display result
-                if prediction is not None:
-                    st.subheader("Prediction Result:")
-                    if prediction == 1:
-                        st.success("The user is likely to purchase the product. 🎉")
-                    else:
-                        st.error("The user is not likely to purchase the product. ❌")
+            # Predict
+            result = predict(model, user_input)
 
-# Run the app
-if __name__ == "__main__":
-    main()
+            # Display result
+            if result is not None:
+                st.markdown("### Prediction Result:")
+                if result == 1:
+                    st.success("The user is predicted to **Purchase** the product. 🎉")
+                else:
+                    st.error("The user is predicted to **Not Purchase** the product. ❌")
