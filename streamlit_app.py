@@ -27,64 +27,78 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Minimal CSS Style
-MINIMAL_STYLE = """
+# Simple CSS Style
+SIMPLE_STYLE = """
     <style>
-    /* Main app background (adapts to dark/light mode) */
+    /* Main app background */
     .stApp {
+        background-color: #f5f5f5; /* Light gray background */
+        color: #333333; /* Dark text */
         font-family: 'Arial', sans-serif;
     }
 
     /* Title styling */
     .title {
         font-size: 36px;
+        color: #333333; /* Dark text */
+        font-family: 'Arial', sans-serif;
         text-align: center;
         margin-bottom: 20px;
     }
 
     /* Button styling */
     .stButton>button {
+        background-color: #4CAF50; /* Green */
+        color: #ffffff; /* White text */
         font-size: 16px;
-        border-radius: 5px;
+        border-radius: 5px; /* Slightly rounded corners */
         padding: 10px 20px;
         border: none;
         transition: background-color 0.3s ease;
     }
 
     .stButton>button:hover {
-        opacity: 0.8;
+        background-color: #45a049; /* Darker green on hover */
     }
 
     /* Input field styling */
-    .stNumberInput input, .stRadio>div, .stSelectbox select {
-        font-size: 14px;
-        border-radius: 5px;
+    .stNumberInput input, .stSelectbox select {
+        background-color: #ffffff; /* White background */
+        color: #333333; /* Dark text */
+        border-radius: 5px; /* Slightly rounded corners */
+        border: 1px solid #cccccc; /* Light gray border */
         padding: 10px;
+        font-size: 14px;
     }
 
     /* Success message styling */
     .stSuccess {
+        background-color: #4CAF50; /* Green */
+        color: #ffffff; /* White text */
         border-radius: 5px;
         padding: 10px;
     }
 
     /* Error message styling */
     .stError {
+        background-color: #ff4444; /* Red */
+        color: #ffffff; /* White text */
         border-radius: 5px;
         padding: 10px;
     }
 
     /* Form container styling */
     .stForm {
+        background-color: #ffffff; /* White background */
         padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 10px; /* Slightly rounded corners */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     }
     </style>
 """
 
-# Apply the minimal style
-st.markdown(MINIMAL_STYLE, unsafe_allow_html=True)
+# Apply the simple style
+st.markdown(SIMPLE_STYLE, unsafe_allow_html=True)
 
 # App title
 st.markdown("<div class='title'>SVM Prediction App 🤖</div>", unsafe_allow_html=True)
@@ -97,9 +111,9 @@ if model is not None:
     # Input form
     with st.form("prediction_form"):
         st.subheader("Input User Data")
-        gender = st.radio("Gender", ["Male", "Female"], index=0, help="Select the gender.")
-        age = st.number_input("Age", min_value=0, max_value=100, step=None, placeholder="Enter age")
-        salary = st.number_input("Estimated Salary", min_value=0, step=None, placeholder="Enter estimated salary")
+        gender = st.selectbox("Gender", ["Male", "Female"], index=0, help="Select the gender.")
+        age = st.number_input("Age", min_value=0, max_value=100, step=1, placeholder="Enter age")
+        salary = st.number_input("Estimated Salary", min_value=0, step=1000, placeholder="Enter estimated salary")
 
         # Submit button
         submitted = st.form_submit_button("Predict")
